@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<title>Music Player</title>
+
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+		<link href="musicPlayer.css" rel="stylesheet" type="text/css" />
+	</head>
+	<body>
+		<section id="siteBackground" class="siteBackground">
+			<article id="blur" class="blur"></article>
+		</section>
+		<div id="playerArea" class="playerArea">
+			<section id="coverArea" class="bigAreaStyle coverArea">
+			</section>
+			
+			<section id="infoArea " class="infoArea bigAreaStyle">
+				<h2 id="songTitle" class="songTitle">Title</h2>
+				<h3 id="singer" class="singer">Singer</h3>
+			</section>
+			<section id="controlArea" class="controlArea bigAreaStyle">
+				<input id="songControl" class="songControl" type="range" />
+				<section id="buttons" class="buttons">
+					<button id="prev" class="buttonStyle pointer">
+						<i class="xi-step-backward xi-3x"></i>
+					</button>
+					<button id="playToggle" class="playToggle pointer">
+						<i class="xi-play xi-5x toggleIcon"></i>
+					</button>
+					<button id="next" class="buttonStyle pointer">
+						<i class="xi-step-forward xi-3x"></i>
+					</button>
+				</section>
+			</section>
+		</div>
+		<script src="MusicList.json" type="text/javascript"></script>
+		<script src="musicPlayer.js"></script>
+	</body>
+</html>

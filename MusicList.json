@@ -1,0 +1,26 @@
+MusicList = {
+	"0": {
+		"title": "Smells Like Teen Spirit",
+		"singer": "Nirvana",
+		"cover": "images/Nirvana - Smells Like Teen Spirit.jpg",
+		"audio": "music/Nirvana - Smells Like Teen Spirit.mp3"
+	},
+	"1": {
+		"title": "505",
+		"singer": "Arctic Monkeys",
+		"cover": "images/Arctic Monkeys - 505.jpg",
+		"audio": "music/Arctic Monkeys - 505.mp3"
+	},
+	"2": {
+		"title": "Smells Like Teen Spirit",
+		"singer": "Nirvana",
+		"cover": "images/maxresdefault.jpg",
+		"audio": "music/Nirvana - Smells Like Teen Spirit.mp3"
+	},
+	"3": {
+		"title": "Smells Like Teen Spirit",
+		"singer": "Nirvana",
+		"cover": "images/maxresdefault.jpg",
+		"audio": "music/Nirvana - Smells Like Teen Spirit.mp3"
+	}
+}
