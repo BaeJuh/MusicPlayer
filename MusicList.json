@@ -1,4 +1,4 @@
-MusicList = {
+MusicJson = {
 	"0": {
 		"title": "Smells Like Teen Spirit",
 		"singer": "Nirvana",
@@ -12,15 +12,27 @@ MusicList = {
 		"audio": "music/Arctic Monkeys - 505.mp3"
 	},
 	"2": {
-		"title": "Smells Like Teen Spirit",
+		"title": "Heart-Shaped Box",
 		"singer": "Nirvana",
-		"cover": "images/maxresdefault.jpg",
-		"audio": "music/Nirvana - Smells Like Teen Spirit.mp3"
+		"cover": "images/Nirvana - Heart Shaped Box.jpg",
+		"audio": "music/Nirvana - Heart-Shaped Box.mp3"
 	},
 	"3": {
-		"title": "Smells Like Teen Spirit",
-		"singer": "Nirvana",
-		"cover": "images/maxresdefault.jpg",
-		"audio": "music/Nirvana - Smells Like Teen Spirit.mp3"
+		"title": "Hysteria",
+		"singer": "Muse",
+		"cover": "images/Muse - Hysteria.jpg",
+		"audio": "music/Muse - Hysteria.mp3"
+	},
+	"4": {
+		"title": "No Roots",
+		"singer": "Alice Merton",
+		"cover": "images/Alice Merton - No Roots.jpg",
+		"audio": "music/Alice Merton - No Roots.mp3"
+	},
+	"5": {
+		"title": "Way Down Wo Go",
+		"singer": "KALEO",
+		"cover": "images/KALEO - Way Down We Go.jpg",
+		"audio": "music/KALEO - Way Down We Go.mp3"
 	}
 }
