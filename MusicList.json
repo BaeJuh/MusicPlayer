@@ -46,5 +46,11 @@ MusicJson = {
 		"singer": "FINNEAS",
 		"cover": "images/FINNEAS - The 90s.jpg",
 		"audio": "music/FINNEAS - The 90s.mp3"
+	},
+	"8": {
+		"title": "Midnight City",
+		"singer": "M83",
+		"cover": "images/M83 - Midnight City.jpg",
+		"audio": "music/M83 - Midnight City.mp3"
 	}
 }
