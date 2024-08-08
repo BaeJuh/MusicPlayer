@@ -32,7 +32,7 @@ class DoublyLinkedList {
 		this.size++;
 	}
 	printNodes(node) {
-		console.log( `현재 ${this.size}개의 곡이 있습니다.` )
+		console.log(`현재 ${this.size}개의 곡이 있습니다.`)
 		if (node.next != null) {
 			this.test += node.title + " \n ";
 			this.printNodes(node.next);
@@ -158,8 +158,14 @@ class MusicPlayer {
 			const second = String(Math.floor(this.song.currentTime % 60)).padStart(2, "0");
 			this.songCurrentTime.innerHTML = `${minute}:${second}`;
 
-			if (this.song.currentTime === this.song.duration) {
+			if (this.song.currentTime === this.song.duration && this.isRepeating === false) {
 				this.getNextSong();
+			} else if (this.song.currentTime === this.song.duration && this.isRepeating === true) {
+				this.currentMusic = this.currentMusic;
+				//this.setInterface();
+				if (this.isPlaying === true) {
+					this.song.play();
+				}
 			}
 		});
 	}
@@ -220,9 +226,9 @@ class MusicPlayer {
 	}
 
 	getShuffledSong() { // 랜더 노래 찾기
-		const shuffleCount = Math.floor( (Math.random() * this.musicList.size + 1) );
-		console.log( `${shuffleCount}` );
-		for ( let i=1; i<shuffleCount; i++ ) {
+		const shuffleCount = Math.floor((Math.random() * this.musicList.size + 1));
+		console.log(`${shuffleCount}`);
+		for (let i = 1; i < shuffleCount; i++) {
 			this.getNextSong();
 		}
 	}

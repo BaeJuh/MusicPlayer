@@ -1,7 +1,7 @@
 * { margin: 0; padding: 0; }
 html, body {
-	height: 100%;
-	width: 100%;
+	width: 100vw;
+	height: 100vh;
 
 	font-size: 10px;
 
@@ -14,8 +14,8 @@ html, body {
 }
 
 .siteBackground {
-	width: 100%;
-	height: 100%;
+	width: 100vw;
+	height: 100vh;
 
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -23,8 +23,8 @@ html, body {
 
 }
 	.blur {
-		width: 100%;
-		height: 100%;
+		width: 100vw;
+		height: 100vh;
 		
 		backdrop-filter: blur(5px);
 	}
@@ -147,6 +147,22 @@ html, body {
 				color: rgb(250, 250, 250);
 				text-shadow: .4rem .25rem .3rem black;
 			}
+	.underButtons {
+		width: 100%;
+		height: 3rem;
+
+		position: relative;
+		top: 3.5rem;
+	}
+		.underButton {
+			background-color: transparent;
+			font-size: 2.5rem;
+
+			border: none;
+
+			width: 50%;
+			height: 100%;
+		}
 
 .bigAreaStyle {
 	width: 90%;
@@ -164,4 +180,19 @@ html, body {
 }
 .floatRight {
 	float: right;
+}
+
+.font {
+	color: rgb(250, 250, 250);
+	text-shadow: .2rem .3rem .15rem #000;
+	letter-spacing: .25rem;
+
+	font-family: "Bebas Neue", sans-serif;
+	font-weight: 600;
+}
+
+@media ( max-width < 500 ) {
+	.playerArea {
+		width: 40rem;
+	}
 }
