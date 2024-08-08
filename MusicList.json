@@ -34,5 +34,17 @@ MusicJson = {
 		"singer": "KALEO",
 		"cover": "images/KALEO - Way Down We Go.jpg",
 		"audio": "music/KALEO - Way Down We Go.mp3"
+	},
+	"6": {
+		"title": "Golden hour",
+		"singer": "JVKE",
+		"cover": "images/JVKE - golden hour.jpg",
+		"audio": "music/JVKE - golden hour.mp3"
+	},
+	"7": {
+		"title": "The 90s",
+		"singer": "FINNEAS",
+		"cover": "images/FINNEAS - The 90s.jpg",
+		"audio": "music/FINNEAS - The 90s.mp3"
 	}
 }

@@ -2,9 +2,19 @@
 <html lang="ko">
 	<head>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
 		<title>Music Player</title>
 
+		<!--Favicon-->
+		<link rel="icon" href="images/favicon/MusicPlay_favicon.ico" type="image/x-icon">
+		<!--Font-->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+		<!--Icon-->
 		<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+		<!--CSS-->
 		<link href="musicPlayer.css" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
@@ -12,23 +22,36 @@
 			<article id="blur" class="blur"></article>
 		</section>
 		<div id="playerArea" class="playerArea">
-			<section id="coverArea" class="bigAreaStyle coverArea"></section>
+			<section id="coverArea" class="coverArea"></section>
 			<section id="infoArea " class="infoArea bigAreaStyle">
 				<h2 id="songTitle" class="songTitle">Title</h2>
 				<h3 id="singer" class="singer">Singer</h3>
 			</section>
 			<audio id="song" class="song"></audio>
 			<section id="controlArea" class="controlArea bigAreaStyle">
-				<input id="songControl" class="songControl" type="range" min="0" max="100" step="0.1" value="0"/>
+				<input id="songControl" class="songControl pointer" type="range" min="0" max="100" step="0.1" value="0"/>
+				<p id="songCurrentTime" class="time floatLeft">00:00</p>
+				<p id="songEndTime" class="time floatRight">00:00</p>
 				<section id="buttons" class="buttons">
-					<button id="prev" class="buttonStyle pointer">
+					<!--Shuffle Button-->
+					<button id="shuffle" class="buttonStyle pointer buttonColor">
+						<i class="xi-shuffle xi-2x"></i>
+					</button>
+					<!--Prev Button-->
+					<button id="prev" class="buttonStyle pointer buttonColor">
 						<i class="xi-step-backward xi-3x"></i>
 					</button>
-					<button id="playToggle" class="playToggle pointer">
+					<!--Play Button-->
+					<button id="playToggle" class="playToggle pointer buttonColor">
 						<i id="playToggleImage" class="xi-play xi-5x toggleIcon"></i>
 					</button>
-					<button id="next" class="buttonStyle pointer">
+					<!--Next Button-->
+					<button id="next" class="buttonStyle pointer buttonColor">
 						<i class="xi-step-forward xi-3x"></i>
+					</button>
+					<!--Repeat Button-->
+					<button id="repeat" class="buttonStyle pointer buttonColor">
+						<i class="xi-repeat xi-2x"></i>
 					</button>
 				</section>
 			</section>
