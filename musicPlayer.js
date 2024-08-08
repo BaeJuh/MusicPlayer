@@ -2,7 +2,7 @@ class DoublyLinkedList {
 	constructor() {
 		this._head = null;
 		this._tail = null;
-		this.size = 0;
+		this._size = 0;
 
 		this.test = " "; // print용 임시 변수
 	}
@@ -18,6 +18,9 @@ class DoublyLinkedList {
 	get tail() {
 		return this._tail;
 	}
+	get size() {
+		return this._size;
+	}
 
 	append(node) {
 		if (this.size === 0) {
@@ -29,7 +32,23 @@ class DoublyLinkedList {
 			this.tail = node;
 		}
 
-		this.size++;
+		this._size++;
+	}
+	returnNodeFromIndex(index) { // 노드는 head를 넣음
+		if (index < this.size) {
+			let node = this.head;
+			if (index === 0) {
+				return node;
+			} else {
+				for (let i = 0; i < index; i++) {
+					node = node.next;
+				}
+				return node;
+			}
+
+		} else {
+			return
+		}
 	}
 	printNodes(node) {
 		console.log(`현재 ${this.size}개의 곡이 있습니다.`)
@@ -71,7 +90,7 @@ class Music {
 	setMusicInformation(musicJson) {
 		this.title = musicJson[this.id]["title"];
 		this.singer = musicJson[this.id]["singer"];
-		this.cover = `url("${musicJson[this.id]["cover"]}")`;
+		this.cover = `${musicJson[this.id]["cover"]}`;
 		this.audio = `${musicJson[this.id]["audio"]}`;
 	}
 }
@@ -85,8 +104,10 @@ class MusicPlayer {
 		//
 		this.currentMusic = null; // Music
 		this.currentMusicDuration = 0;
+		this.isShuffle = false;
 		this.isPlaying = false; // 노래가 재생 중이면 True 아니면 False
 		this.isRepeating = false; // 노래는 반복 재생할거면 True 아니면 False
+		this.isUnderMenuOn = false; // UnderMenu가 열려있는지 없는지
 
 		// Visible interface HTML Element
 		this.playerArea = document.getElementById("playerArea"); // 플레이어 배경
@@ -105,6 +126,11 @@ class MusicPlayer {
 		this.playToggle = document.getElementById("playToggle"); // 시작/멈춤 버튼
 		this.nextButton = document.getElementById("next"); // 다음 곡 버튼
 		this.repeatButton = document.getElementById("repeat"); // 반복 버튼
+
+		this.underMenuArea = document.getElementById("underMenuArea");
+		this.trackButton = document.getElementById("track");
+		this.lyricsButton = document.getElementById("lyrics");
+		this.underMenu = document.getElementById("underMenu");
 	}
 
 	setMusicList() {
@@ -125,8 +151,8 @@ class MusicPlayer {
 	}
 
 	setInterface() { // 화면 표시/ 노래 세팅
-		this.coverArea.style.backgroundImage = this.currentMusic.cover;
-		this.siteBackground.style.backgroundImage = this.currentMusic.cover;
+		this.coverArea.style.backgroundImage = `url("${this.currentMusic.cover}")`;
+		this.siteBackground.style.backgroundImage = `url("${this.currentMusic.cover}")`;
 
 		this.song.src = this.currentMusic.audio;
 		this.songTitle.innerText = this.currentMusic.title;
@@ -149,17 +175,22 @@ class MusicPlayer {
 			this.song.currentTime = (this.songControl.value * this.song.duration) / 100;
 		});
 
-		this.song.addEventListener("timeupdate", () => {
+		this.song.addEventListener("timeupdate", () => { // 노래가 진행될 동안 생길 이벤트
 			if (this.isPlaying === true) {
 				this.songControl.value = isNaN((this.song.currentTime / this.song.duration) * 100) ? 0 : (this.song.currentTime / this.song.duration) * 100;
 			}
-
+			// 노래 시간 설정
 			const minute = String(Math.floor(this.song.currentTime / 60)).padStart(2, "0");
 			const second = String(Math.floor(this.song.currentTime % 60)).padStart(2, "0");
 			this.songCurrentTime.innerHTML = `${minute}:${second}`;
-
+			//노래 넘기기
 			if (this.song.currentTime === this.song.duration && this.isRepeating === false) {
-				this.getNextSong();
+				//this.getNextSong();
+				if ( this.isShuffle === true ) {
+					this.getShuffledSong();
+				} else {
+					this.getNextSong();
+				}
 			} else if (this.song.currentTime === this.song.duration && this.isRepeating === true) {
 				this.currentMusic = this.currentMusic;
 				//this.setInterface();
@@ -170,7 +201,7 @@ class MusicPlayer {
 		});
 	}
 
-	clickButtons() {
+	clickButtons() { // 클릭 되는 버튼들의 모임
 		this.playToggle.addEventListener("click", () => {
 			this.isPlaying = !this.isPlaying;
 			if (this.isPlaying === true) {
@@ -182,7 +213,11 @@ class MusicPlayer {
 			this.playToggle.innerHTML = `<i class="${this.isPlaying ? "xi-pause" : "xi-play"} xi-5x toggleIcon"></i>`
 		});
 		this.nextButton.addEventListener("click", () => {
-			this.getNextSong();
+			if ( this.isShuffle === true ) {
+				this.getShuffledSong();
+			} else {
+				this.getNextSong();
+			}
 		});
 
 		this.prevButton.addEventListener("click", () => {
@@ -195,7 +230,11 @@ class MusicPlayer {
 		});
 
 		this.shuffleButton.addEventListener("click", () => {
-			this.getShuffledSong();
+			this.isShuffle = !this.isShuffle;
+
+			this.shuffleButton.style = this.isShuffle === true ? `text-shadow: .2rem .3rem .15rem #c8c8c8;` : `text-shadow: .2rem .3rem .15rem #000;`;
+			//text-shadow: .2rem .3rem .15rem #000;
+			//this.getShuffledSong();
 		});
 
 		this.repeatButton.addEventListener("click", () => {
@@ -204,6 +243,26 @@ class MusicPlayer {
 			// 	this.song.addEventListener("timeupdate" )
 			// }
 			this.repeatButton.innerHTML = `<i class="${this.isRepeating ? "xi-repeat-one" : "xi-repeat"} xi-2x toggleIcon"></i>`
+		});
+
+		this.trackButton.addEventListener("click", () => {
+			this.isUnderMenuOn = !this.isUnderMenuOn;
+			if (this.isUnderMenuOn === true) {
+				this.underMenuArea.style.transform = "translateY( calc( -100% + 3.5rem ) )";
+				this.showTrack();
+			} else {
+				this.underMenuArea.style.transform = "translateY( 0 )";
+			}
+		});
+
+		this.lyricsButton.addEventListener("click", () => {
+			this.isUnderMenuOn = !this.isUnderMenuOn;
+			if (this.isUnderMenuOn === true) {
+				this.underMenuArea.style.transform = "translateY( calc( -100% + 3.5rem ) )";
+				this.showLyrics();
+			} else {
+				this.underMenuArea.style.transform = "translateY( 0 )";
+			}
 		});
 	}
 
@@ -233,13 +292,48 @@ class MusicPlayer {
 		}
 	}
 
+	showTrack() { // Show Track List
+		this.underMenu.innerHTML = "";
+		for (let i = 0; i < this.musicList.size; i++) {
+			const music = this.musicList.returnNodeFromIndex(i);
+			this.underMenu.innerHTML += music === this.currentMusic ? `
+				<div id="songList${i}" class="songList " style="background-color: rgba(128, 128, 128, 0.7);">
+					<img src="${music.cover}" />
+					<p class="songListPara">${music.title}<br>${music.singer}</p>
+				</div>
+			` : `
+				<div id="songList${i}" class="songList ">
+					<img src="${music.cover}" />
+					<p class="songListPara">${music.title}<br>${music.singer}</p>
+				</div>
+			`;
+			//console.log( document.getElementById(`songList${i}`) );
+		}
+		this.underMenu.addEventListener("click", () => {
+			this.isUnderMenuOn = false;
+			this.underMenuArea.style.transform = "translateY( 0 )";
+		});
+	}
+
+	showLyrics() {
+		this.underMenu.innerHTML = `
+			<p id="underLyrics" class="underLyrics">
+				#$!%!#$^%#$#$&$%^*$%(%$*&%#$^&#$^%#$#$#$)
+				currentMusic.lyrics
+			</p>
+		`;
+
+		this.underMenu.addEventListener("click", () => {
+			this.isUnderMenuOn = false;
+			this.underMenuArea.style.transform = "translateY( 0 )";
+		});
+	}
+
 	readyForStart() {
 		this.setMusicList(); // 노래 데이터 세팅
 		this.setInterface(); // 화면 표시
 		this.controlSong(); // 노래 재생
 		this.clickButtons(); // 이전 / 다음 / 시작 버튼 기능 세팅
-
-		//this.musicList.printNodes( this.currentMusic );
 	}
 }
 
