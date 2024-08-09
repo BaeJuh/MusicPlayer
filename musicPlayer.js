@@ -47,8 +47,18 @@ class DoublyLinkedList {
 			}
 
 		} else {
-			return
+			return null;
 		}
+	}
+	returnShuffleNode(node) { // random 값 만큼 순환 후 node 반환
+		const randomIndex = Math.floor(Math.random() * this.size + 1);
+		let returnNode = null;
+		console.log(randomIndex);
+		for (let i = 1; i < randomIndex; i++) {
+			//console.log( node.next );
+			node = node.next === null ? this.head : node.next;
+		}
+		return node;
 	}
 	printNodes(node) {
 		console.log(`현재 ${this.size}개의 곡이 있습니다.`)
@@ -70,6 +80,7 @@ class Music {
 		this.singer = "";
 		this.cover = ""; // URL
 		this.audio = "";
+		this.lyrics = "";
 
 		this._next = null;
 		this._prev = null;
@@ -88,10 +99,11 @@ class Music {
 	}
 
 	setMusicInformation(musicJson) {
-		this.title = musicJson[this.id]["title"];
-		this.singer = musicJson[this.id]["singer"];
-		this.cover = `${musicJson[this.id]["cover"]}`;
-		this.audio = `${musicJson[this.id]["audio"]}`;
+		this.title = musicJson["title"];
+		this.singer = musicJson["singer"];
+		this.cover = `${musicJson["cover"]}`;
+		this.audio = `${musicJson["audio"]}`;
+		this.lyrics = `${musicJson["lyrics"]}`;
 	}
 }
 
@@ -131,14 +143,16 @@ class MusicPlayer {
 		this.trackButton = document.getElementById("track");
 		this.lyricsButton = document.getElementById("lyrics");
 		this.underMenu = document.getElementById("underMenu");
+		this.underMenuBackground = document.getElementById("underMenuBackground");
 	}
 
 	setMusicList() {
 		//console.log( this.musicJson );
 		this.musicList = new DoublyLinkedList();
 		for (const key in this.musicJson) {
+			const musicInfo = this.musicJson[key];
 			const music = new Music(key);
-			music.setMusicInformation(this.musicJson);
+			music.setMusicInformation(musicInfo);
 
 			//console.log( music.title );
 			this.musicList.append(music);
@@ -186,7 +200,7 @@ class MusicPlayer {
 			//노래 넘기기
 			if (this.song.currentTime === this.song.duration && this.isRepeating === false) {
 				//this.getNextSong();
-				if ( this.isShuffle === true ) {
+				if (this.isShuffle === true) {
 					this.getShuffledSong();
 				} else {
 					this.getNextSong();
@@ -212,8 +226,9 @@ class MusicPlayer {
 			//console.log( this.song.duration )
 			this.playToggle.innerHTML = `<i class="${this.isPlaying ? "xi-pause" : "xi-play"} xi-5x toggleIcon"></i>`
 		});
+
 		this.nextButton.addEventListener("click", () => {
-			if ( this.isShuffle === true ) {
+			if (this.isShuffle === true) {
 				this.getShuffledSong();
 			} else {
 				this.getNextSong();
@@ -246,25 +261,28 @@ class MusicPlayer {
 		});
 
 		this.trackButton.addEventListener("click", () => {
-			this.isUnderMenuOn = !this.isUnderMenuOn;
-			if (this.isUnderMenuOn === true) {
-				this.underMenuArea.style.transform = "translateY( calc( -100% + 3.5rem ) )";
-				this.showTrack();
-			} else {
-				this.underMenuArea.style.transform = "translateY( 0 )";
-			}
+			this.isUnderMenuOn = true;
+
+			this.underMenuBackground.style.display = "block";
+			this.underMenuArea.style.transform = "translateY( calc( -100% + 3.5rem ) )";
+			this.showTrack();
 		});
 
 		this.lyricsButton.addEventListener("click", () => {
-			this.isUnderMenuOn = !this.isUnderMenuOn;
-			if (this.isUnderMenuOn === true) {
-				this.underMenuArea.style.transform = "translateY( calc( -100% + 3.5rem ) )";
-				this.showLyrics();
-			} else {
-				this.underMenuArea.style.transform = "translateY( 0 )";
-			}
+			this.isUnderMenuOn = true;
+
+			this.underMenuBackground.style.display = "block";
+			this.underMenuArea.style.transform = "translateY( calc( -100% + 3.5rem ) )";
+			this.showLyrics();
+		});
+		this.underMenuBackground.addEventListener("click", () => {
+			this.underMenuArea.style.transform = "translateY( 0 )";
+			this.underMenuBackground.style.display = "none";
+			this.isUnderMenuOn = false;
 		});
 	}
+
+	clickKeyboards() {} // 키보드 이벤트
 
 	getNextSong() { // 다음 곡 불러오기
 		this.currentMusic = this.currentMusic === this.musicList.tail ? this.musicList.head : this.currentMusic.next;
@@ -284,11 +302,16 @@ class MusicPlayer {
 		}
 	}
 
-	getShuffledSong() { // 랜더 노래 찾기
-		const shuffleCount = Math.floor((Math.random() * this.musicList.size + 1));
-		console.log(`${shuffleCount}`);
-		for (let i = 1; i < shuffleCount; i++) {
-			this.getNextSong();
+	getShuffledSong() { // 랜덤 노래 찾기
+		// const shuffleCount = Math.floor((Math.random() * this.musicList.size + 1));
+		// console.log(`${shuffleCount}`);
+		// for (let i = 1; i < shuffleCount; i++) {
+		// 	this.getNextSong();
+		// }
+		this.currentMusic = this.musicList.returnShuffleNode(this.currentMusic);
+		this.setInterface();
+		if (this.isPlaying === true) {
+			this.song.play();
 		}
 	}
 
@@ -307,26 +330,29 @@ class MusicPlayer {
 					<p class="songListPara">${music.title}<br>${music.singer}</p>
 				</div>
 			`;
-			//console.log( document.getElementById(`songList${i}`) );
+
+			
 		}
-		this.underMenu.addEventListener("click", () => {
-			this.isUnderMenuOn = false;
-			this.underMenuArea.style.transform = "translateY( 0 )";
-		});
+		for (let i = 0; i < this.musicList.size; i++) {
+			document.getElementById(`songList${i}`).addEventListener("click", ()=>{
+				console.log(i + ":!!!!!!!!!!!!!!!!!!!!");
+				this.currentMusic = this.musicList.returnNodeFromIndex( i );
+				this.setInterface();
+			});
+		}
 	}
 
 	showLyrics() {
 		this.underMenu.innerHTML = `
 			<p id="underLyrics" class="underLyrics">
-				#$!%!#$^%#$#$&$%^*$%(%$*&%#$^&#$^%#$#$#$)
-				currentMusic.lyrics
+				${this.currentMusic.lyrics}
 			</p>
 		`;
 
-		this.underMenu.addEventListener("click", () => {
-			this.isUnderMenuOn = false;
-			this.underMenuArea.style.transform = "translateY( 0 )";
-		});
+		// this.underMenu.addEventListener("click", () => {
+		// 	this.isUnderMenuOn = false;
+		// 	this.underMenuArea.style.transform = "translateY( 0 )";
+		// });
 	}
 
 	readyForStart() {

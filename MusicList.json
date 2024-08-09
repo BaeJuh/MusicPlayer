@@ -3,54 +3,63 @@ MusicJson = {
 		"title": "Smells Like Teen Spirit",
 		"singer": "Nirvana",
 		"cover": "images/Nirvana - Smells Like Teen Spirit.jpg",
-		"audio": "music/Nirvana - Smells Like Teen Spirit.mp3"
+		"audio": "music/Nirvana - Smells Like Teen Spirit.mp3",
+		"lyrics": "Load up on guns, bring your friends<br>It's fun to lose and to pretend<br>She's over-bored and self-assured<br>Oh no, I know a dirty word<br>Hello, hello, hello, how low<br>Hello, hello, hello, how low<br>Hello, hello, hello, how low<br>Hello, hello, hello<br>With the lights out, it's less dangerous<br>Here we are now, entertain us<br>I feel stupid and contagious<br>Here we are now, entertain us<br>A mulatto, an albino<br>A mosquito, my libido<br>Yeah<br>Hey<br>Yay<br>I'm worse at what I do best<br>And for this gift I feel blessed<br>Our little group has always been<br>And always will until the end<br>Hello, hello, hello, how low<br>Hello, hello, hello, how low<br>Hello, hello, hello, how low<br>Hello, hello, hello<br>With the lights out, it's less dangerous<br>Here we are now, entertain us<br>I feel stupid and contagious<br>Here we are now, entertain us<br>A mulatto, an albino<br>A mosquito, my libido<br>Yeah<br>Hey<br>Yay<br>And I forget just why I taste<br>Oh yeah, I guess it makes me smile<br>I found it hard, it's hard to find<br>Ooh well, whatever, nevermind<br>Hello, hello, hello, how low<br>Hello, hello, hello, how low<br>Hello, hello, hello, how low<br>Hello, hello, hello<br>With the lights out, it's less dangerous<br>Here we are now, entertain us<br>I feel stupid and contagious<br>Here we are now, entertain us<br>A mulatto, an albino<br>A mosquito, my libido<br>A denial<br>A denial<br>A denial<br>A denial<br>A denial<br>A denial<br>A denial<br>A denial<br>A denial"
 	},
 	"1": {
 		"title": "505",
 		"singer": "Arctic Monkeys",
 		"cover": "images/Arctic Monkeys - 505.jpg",
-		"audio": "music/Arctic Monkeys - 505.mp3"
+		"audio": "music/Arctic Monkeys - 505.mp3",
+		"lyrics": ""
 	},
 	"2": {
 		"title": "Heart-Shaped Box",
 		"singer": "Nirvana",
 		"cover": "images/Nirvana - Heart Shaped Box.jpg",
-		"audio": "music/Nirvana - Heart-Shaped Box.mp3"
+		"audio": "music/Nirvana - Heart-Shaped Box.mp3",
+		"lyrics": ""
 	},
 	"3": {
 		"title": "Hysteria",
 		"singer": "Muse",
 		"cover": "images/Muse - Hysteria.jpg",
-		"audio": "music/Muse - Hysteria.mp3"
+		"audio": "music/Muse - Hysteria.mp3",
+		"lyrics": ""
 	},
 	"4": {
 		"title": "No Roots",
 		"singer": "Alice Merton",
 		"cover": "images/Alice Merton - No Roots.jpg",
-		"audio": "music/Alice Merton - No Roots.mp3"
+		"audio": "music/Alice Merton - No Roots.mp3",
+		"lyrics": ""
 	},
 	"5": {
 		"title": "Way Down Wo Go",
 		"singer": "KALEO",
 		"cover": "images/KALEO - Way Down We Go.jpg",
-		"audio": "music/KALEO - Way Down We Go.mp3"
+		"audio": "music/KALEO - Way Down We Go.mp3",
+		"lyrics": ""
 	},
 	"6": {
 		"title": "Golden hour",
 		"singer": "JVKE",
 		"cover": "images/JVKE - golden hour.jpg",
-		"audio": "music/JVKE - golden hour.mp3"
+		"audio": "music/JVKE - golden hour.mp3",
+		"lyrics": ""
 	},
 	"7": {
 		"title": "The 90s",
 		"singer": "FINNEAS",
 		"cover": "images/FINNEAS - The 90s.jpg",
-		"audio": "music/FINNEAS - The 90s.mp3"
+		"audio": "music/FINNEAS - The 90s.mp3",
+		"lyrics": ""
 	},
 	"8": {
 		"title": "Midnight City",
 		"singer": "M83",
 		"cover": "images/M83 - Midnight City.jpg",
-		"audio": "music/M83 - Midnight City.mp3"
+		"audio": "music/M83 - Midnight City.mp3",
+		"lyrics": ""
 	}
 }

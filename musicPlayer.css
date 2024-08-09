@@ -26,7 +26,7 @@ html, body {
 		width: 100vw;
 		height: 100vh;
 		
-		backdrop-filter: blur(5px);
+		/* backdrop-filter: blur(5px); */
 	}
 
 .playerArea {
@@ -67,9 +67,10 @@ html, body {
 		margin-top: 2rem;
 		*/
 		height: 7rem;
+		text-align: center;
 	}
 		.songTitle {
-			font-size: 3rem;
+			font-size: 3.5rem;
 		}
 		.singer {
 			font-size: 2rem;
@@ -132,8 +133,6 @@ html, body {
 		display: flex;
 		align-items: center;
 		justify-content: space-around;
-
-		
 	}
 		.playToggle {
 			/* border-radius: 50%; */
@@ -149,6 +148,13 @@ html, body {
 				color: rgb(250, 250, 250);
 				text-shadow: .4rem .25rem .3rem black;
 			}
+		.smallerButton {
+			font-size: 4rem;
+			line-height: 100%;
+		}
+		#shuffle, #repeat{
+			padding-top: 5px;
+		}
 	.underMenuArea {
 		width: 100%;
 		height: calc( 80% );
@@ -161,6 +167,7 @@ html, body {
 
 		background-color: rgba(50, 50, 50, 0.4);
 		backdrop-filter: blur(5px);
+		z-index: 100;
 	}
 		.underButton {
 			background-color: transparent;
@@ -170,7 +177,8 @@ html, body {
 
 			width: 50%;
 			height: 3rem;
-			display: block;
+			/* display: block; */
+			
 		}
 
 		.underMenu {
@@ -179,10 +187,20 @@ html, body {
 			margin-top: 3.5rem;
 
 			overflow: scroll;
+			
 		}
+			.underMenuBackground {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vh;
+				display: none;
+				background-color: rgba(0, 0, 0, 0.3);
+			}
 			.songList {
 				/* background-color: rgba(128, 128, 128, 0.5); */
-				margin-top: .5rem;
+				margin-bottom: 1rem;
 				display: flex;
 				vertical-align: middle;
 			}
@@ -194,11 +212,13 @@ html, body {
 				.songListPara{
 					margin-left: 1rem;
 					font-size: 2rem;
+					
 				}
 			.underLyrics {
 				text-align: center;
 				margin-top: .5rem;
 				font-size: 2rem;
+				margin-bottom: 3rem;
 			}
 			.underMenu::-webkit-scrollbar {
 				appearance: none;
@@ -207,7 +227,6 @@ html, body {
 	width: 90%;
 	margin: auto;
 	margin-top: 3rem;
-
 }
 
 .pointer {
