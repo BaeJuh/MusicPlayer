@@ -320,12 +320,12 @@ class MusicPlayer {
 		for (let i = 0; i < this.musicList.size; i++) {
 			const music = this.musicList.returnNodeFromIndex(i);
 			this.underMenu.innerHTML += music === this.currentMusic ? `
-				<div id="songList${i}" class="songList " style="background-color: rgba(128, 128, 128, 0.7);">
+				<div id="songList${i}" class="songList pointer" style="background-color: rgba(128, 128, 128, 0.7);">
 					<img src="${music.cover}" />
 					<p class="songListPara">${music.title}<br>${music.singer}</p>
 				</div>
 			` : `
-				<div id="songList${i}" class="songList ">
+				<div id="songList${i}" class="songList pointer">
 					<img src="${music.cover}" />
 					<p class="songListPara">${music.title}<br>${music.singer}</p>
 				</div>
@@ -335,7 +335,6 @@ class MusicPlayer {
 		}
 		for (let i = 0; i < this.musicList.size; i++) {
 			document.getElementById(`songList${i}`).addEventListener("click", ()=>{
-				console.log(i + ":!!!!!!!!!!!!!!!!!!!!");
 				this.currentMusic = this.musicList.returnNodeFromIndex( i );
 				this.setInterface();
 			});
